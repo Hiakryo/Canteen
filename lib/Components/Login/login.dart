@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Components/BottomNav.dart';
 import 'package:flutter_app/Components/Register/register.dart';
+import 'package:flutter_app/main.dart';
 import 'file:///C:/Users/sheed/Desktop/flutter_app/lib/Components/TextFieldContainer.dart';
 
 import '../BaseTextField.dart';
@@ -31,6 +32,9 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
+            Image.asset('Assets/logo.png',
+              height: screenSize.height *0.3,
+            ),
             BaseTextField(
               hinttext: "Username",
               icon: Icons.person,
@@ -48,7 +52,7 @@ class Body extends StatelessWidget {
               text: "LOGIN",
               textColor: Colors.white,
                 press: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>BottomNav()),);
+                 Navigator.push(context,MaterialPageRoute(builder: (context)=>BottomNav()),);
                 },
             ),
             Button(

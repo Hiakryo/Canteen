@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: screenSize.width * 0.8,
+      width: screenSize.width * 0.9,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: FlatButton(

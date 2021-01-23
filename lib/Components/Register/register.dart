@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../BaseTextField.dart';
 import '../Button.dart';
@@ -26,13 +27,14 @@ class Body extends StatelessWidget {
         height: screenSize.height,
         child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget> [
-                Text(
-                  'Register',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 32, color: Colors.black),
+
+
+                Image.asset('Assets/logo.png',
+                  height: screenSize.height *0.3,
                 ),
+                SizedBox(height: screenSize.height*0.1),
                 BaseTextField(
                   hinttext: "Username",
                   icon: Icons.person,
@@ -45,7 +47,6 @@ class Body extends StatelessWidget {
                   isPass: true,
                   onChanged: (value){},
                 ),
-
                 Button(
                   text: "REGISTER!",
                   textColor: Colors.white,

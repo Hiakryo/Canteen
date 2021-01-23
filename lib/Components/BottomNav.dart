@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             _selectedItem = val;
           });
         },
-        defaultSelectedIndex: 1,
+        defaultSelectedIndex: 0,
       ),
       appBar: AppBar(
         title: Text("Home"),
