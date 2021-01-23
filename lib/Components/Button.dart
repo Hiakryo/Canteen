@@ -19,6 +19,7 @@ class Button extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
           color: Colors.green,
           onPressed: press,
+          
           child: Text(
             text,
             style: TextStyle(color: Colors.white),
