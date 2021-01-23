@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/Components/bottom_navigation_bar.dart';
 import 'package:flutter_app/Components/Views/register.dart';
 import 'package:flutter_app/Components/text_field_container.dart';
-import '../base_text_field.dart';
-import '../button.dart';
+import 'package:flutter_app/Components/base_text_field.dart';
+import 'package:flutter_app/Components/button.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

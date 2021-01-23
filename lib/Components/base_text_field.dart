@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'text_field_container.dart';
+import 'package:flutter_app/Components/text_field_container.dart';
 
 class BaseTextField extends StatelessWidget {
   final String hinttext;
   final IconData icon;
   final ValueChanged<String> onChanged;
   final bool isPass;
+
   const BaseTextField({
     Key key,
     this.hinttext,
@@ -14,7 +15,7 @@ class BaseTextField extends StatelessWidget {
     this.isPass,
   }) : super(key: key);
 
-@override
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
@@ -27,32 +28,16 @@ class BaseTextField extends StatelessWidget {
             ),
             hintText: hinttext,
             border: InputBorder.none
-        ) ,
-        validator: (String value){
-          if(value.isEmpty){
+        ),
+        validator: (String value) {
+          if (value.isEmpty) {
             return "Required";
           }
-          else{
+          else {
             return null;
           }
         },
       ),
     );
   }
-
-  // Widget buildUsername() {
-  //   return TextFormField(
-  //     decoration: InputDecoration(
-  //       icon: Icon(icon, color: Colors.amber),
-  //       hintText: hinttext,
-  //       border: InputBorder.none,
-  //     ),
-  //     validator: (String value) {
-  //       if (value.isEmpty) {
-  //         return "Required";
-  //       } else {
-  //         return null;
-  //       }
-  //     },
-  //   );
-  // }
+}
