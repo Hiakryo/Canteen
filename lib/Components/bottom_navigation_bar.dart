@@ -3,7 +3,9 @@ import 'package:flutter_app/Components/Views/home.dart';
 import 'package:flutter_app/Components/Views/tenants.dart';
 import 'package:flutter_app/Components/globals.dart' as globals;
 
+import 'VIews/point.dart';
 import 'Views/profile.dart';
+import 'Views/qr.dart';
 
 class BottomNavbar extends StatefulWidget {
   @override
@@ -24,9 +26,9 @@ class BottomNavbarState extends State<BottomNavbar> {
     _pages = [
       MainScreen(),
       TenantsScreen(),
-      TenantsScreen(),
-      MainScreen(),
-      TenantsScreen()
+      QRViewExample(),
+      PointScreen(),
+      Profile()
     ];
     _pageController = PageController(initialPage: _selectedPageIndex);
   }
@@ -55,19 +57,23 @@ class BottomNavbarState extends State<BottomNavbar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.black,
             icon: Icon(Icons.restaurant_menu),
             label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            backgroundColor: Colors.black,
+            icon: Icon(Icons.qr_code),
             label: 'QR',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            backgroundColor: Colors.black,
+            icon: Icon(Icons.monetization_on_rounded),
             label: 'Point',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            backgroundColor: Colors.black,
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],

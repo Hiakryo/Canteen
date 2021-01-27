@@ -55,7 +55,6 @@ class TenantsScreenState extends State<TenantsScreen>
               return tenantRow(index);
             }),
       ),
-      bottomNavigationBar: BottomNavbar(),
     );
   }
 
