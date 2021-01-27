@@ -2,59 +2,91 @@ import 'package:flutter/material.dart';
 import '../base_text_field.dart';
 import '../button.dart';
 import '../Views/login.dart';
+import 'package:flutter_app/Components/bottom_navigation_bar.dart';
 
 class RegisterScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Body(),
-    );
-  }
-}
+  String _username;
+  String _password;
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: screenSize.height,
-        child: SingleChildScrollView(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Image.asset(
-              'Assets/logo.png',
-              height: screenSize.height * 0.3,
-            ),
-            BaseTextField(
-              hinttext: "Username",
-              icon: Icons.person,
-              isPass: false,
-              onChanged: (value) {},
-            ),
-            BaseTextField(
-              hinttext: "Password",
-              icon: Icons.lock,
-              isPass: true,
-              onChanged: (value) {},
-            ),
-            Button(
-              text: "REGISTER!",
-              textColor: Colors.white,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              },
-            ),
-          ],
-        )));
+    return Scaffold(
+      //appBar: AppBar(title: Text("FormDemo")),
+      body: SingleChildScrollView(
+          child: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              height: screenSize.height,
+              child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: screenSize.height * 0.2),
+                      Text('kuda'),
+                      BaseTextField(
+                        hinttext: "Username",
+                        icon: Icons.person,
+                        isPass: false,
+                        onChanged: (value) {},
+                      ),
+                      BaseTextField(
+                        hinttext: "Telephone",
+                        icon: Icons.phone,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                      BaseTextField(
+                        hinttext: "Email",
+                        icon: Icons.email,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                      BaseTextField(
+                        hinttext: "NIK/NIP",
+                        icon: Icons.credit_card,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                       BaseTextField(
+                        hinttext: "School Name",
+                        icon: Icons.school,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                      BaseTextField(
+                        hinttext: "Password",
+                        icon: Icons.lock,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                      BaseTextField(
+                        hinttext: "Confirm Password",
+                        icon: Icons.lock,
+                        isPass: true,
+                        onChanged: (value) {},
+                      ),
+                      Button(
+                        text: "Register",
+                        textColor: Colors.white,
+                        press: () {
+                          if (!_formKey.currentState.validate()) {
+                            return;
+                          }
+
+                          Navigator.pop(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
+                        },
+                      ),
+                    ],
+                   
+                  )
+                  ))),
+    );
   }
 }

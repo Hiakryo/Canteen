@@ -1,124 +1,186 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Components/Views/home.dart';
+import 'package:flutter_app/Components/Views/tenants.dart';
+import 'package:flutter_app/Components/globals.dart' as globals;
 
-class BottomNav extends StatelessWidget {
+import 'Views/profile.dart';
+
+class BottomNavbar extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "App",
-      home: HomePage(),
-    );
+  BottomNavbarState createState() => BottomNavbarState();
+}
+
+class BottomNavbarState extends State<BottomNavbar> {
+  List<Widget> _pages;
+  PageController _pageController;
+  var _selectedPageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selectedPageIndex = 0;
+
+    _pages = [
+      MainScreen(),
+      TenantsScreen(),
+      TenantsScreen(),
+      MainScreen(),
+      TenantsScreen()
+    ];
+    _pageController = PageController(initialPage: _selectedPageIndex);
   }
-}
 
-class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
-}
-
-
-class _HomePageState extends State<HomePage> {
-  int _selectedItem = 0;
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(
-        iconList: [
-          Icons.home,
-          Icons.restaurant_menu,
-          Icons.qr_code,
-          Icons.monetization_on_rounded,
-          Icons.person,
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          children: _pages,
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Colors.black,
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu),
+            label: 'Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'QR',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Point',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Profile',
+          ),
         ],
-        onChange: (val) {
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        currentIndex: _selectedPageIndex,
+        onTap: (selectedPageIndex) {
           setState(() {
-            _selectedItem = val;
+            _selectedPageIndex = selectedPageIndex;
+            _pageController.jumpToPage(selectedPageIndex);
           });
         },
-        defaultSelectedIndex: 0,
-      ),
-      appBar: AppBar(
-        title: Text("Home"),
-      ),
-      body: Center(
-        child: Text(
-          "Hello from Item $_selectedItem",
-          style: TextStyle(fontSize: 26),
-        ),
+        // onChange: (val) {
+        //   setState(() {
+        //     _selectedPageIndex = val;
+        //   });
+        // },
+        // defaultSelectedIndex: 0,
       ),
     );
   }
 }
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  final int defaultSelectedIndex;
-  final Function(int) onChange;
-  final List<IconData> iconList;
+// class CustomBottomNavigationBar extends StatefulWidget {
+//   final int defaultSelectedIndex;
+//   final Function(int) onChange;
+//   final List<IconData> iconList;
 
-  CustomBottomNavigationBar(
-      {this.defaultSelectedIndex = 0,
-        @required this.iconList,
-        @required this.onChange});
+//   CustomBottomNavigationBar(
+//       {this.defaultSelectedIndex = 0,
+//       @required this.iconList,
+//       @required this.onChange});
 
-  @override
-  _CustomBottomNavigationBarState createState() =>
-      _CustomBottomNavigationBarState();
-}
+//   @override
+//   _CustomBottomNavigationBarState createState() =>
+//       _CustomBottomNavigationBarState();
+// }
 
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int _selectedIndex = 0;
-  List<IconData> _iconList = [];
+// class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+//   List<IconData> _iconList = [];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     _iconList = widget.iconList;
+//   }
 
-    _selectedIndex = widget.defaultSelectedIndex;
-    _iconList = widget.iconList;
-  }
+// @override
+// Widget build(BuildContext context) {
+//   List<Widget> _navBarItemList = [];
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> _navBarItemList = [];
+//   for (var i = 0; i < _iconList.length; i++) {
+//     _navBarItemList.add(buildNavBarItem(_iconList[i], i));
+//   }
 
-    for (var i = 0; i < _iconList.length; i++) {
-      _navBarItemList.add(buildNavBarItem(_iconList[i], i));
-    }
+//   return Row(
+//     children: _navBarItemList,
+//   );
+// }
 
-    return Row(
-      children: _navBarItemList,
-    );
-  }
-
-  Widget buildNavBarItem(IconData icon, int index) {
-    return GestureDetector(
-      onTap: () {
-        widget.onChange(index);
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      child: Container(
-        height: 60,
-        width: MediaQuery.of(context).size.width / _iconList.length,
-        decoration: index == _selectedIndex
-            ? BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 4, color: Colors.green),
-            ),
-            gradient: LinearGradient(colors: [
-              Colors.green.withOpacity(0.3),
-              Colors.green.withOpacity(0.015),
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
-          // color: index == _selectedItemIndex ? Colors.green : Colors.white,
-        )
-            : BoxDecoration(),
-        child: Icon(
-          icon,
-          color: index == _selectedIndex ? Colors.black : Colors.grey,
-        ),
-      ),
-    );
-  }
-}
+// Widget buildNavBarItem(IconData icon, int index) {
+//   return GestureDetector(
+//     onTap: () {
+//       widget.onChange(index);
+//       setState(() {
+//         globals.globalIndex = index;
+//         _pageController.jumpToPage();
+//         globals.globalIndex = index;
+//       });
+//       // switch (globals.globalIndex) {
+//       //   case 0:
+//       //     Navigator.push(
+//       //         context, MaterialPageRoute(builder: (context) => Home()));
+//       //     break;
+//       //   case 1:
+//       //     Navigator.push(context,
+//       //         MaterialPageRoute(builder: (context) => TenantsScreen()));
+//       //     break;
+//       //   case 2:
+//       //     Navigator.push(context,
+//       //         MaterialPageRoute(builder: (context) => TenantsScreen()));
+//       //     break;
+//       //   case 3:
+//       //     Navigator.push(context,
+//       //         MaterialPageRoute(builder: (context) => TenantsScreen()));
+//       //     break;
+//       //   case 4:
+//       //     Navigator.push(
+//       //         context, MaterialPageRoute(builder: (context) => Profile()));
+//       //     break;
+//       //   default:
+//       // }
+//     },
+//     child: Container(
+//       height: 60,
+//       width: MediaQuery.of(context).size.width / _iconList.length,
+//       decoration: index == globals.globalIndex
+//           ? BoxDecoration(
+//               border: Border(
+//                 bottom: BorderSide(width: 4, color: Colors.green),
+//               ),
+//               gradient: LinearGradient(colors: [
+//                 Colors.green.withOpacity(0.3),
+//                 Colors.green.withOpacity(0.015),
+//               ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+//               // color: index == _selectedItemIndex ? Colors.green : Colors.white,
+//               )
+//           : BoxDecoration(),
+//       child: Icon(
+//         icon,
+//         color: index == globals.globalIndex ? Colors.black : Colors.grey,
+//       ),
+//     ),
+//   );
+// }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/sheed/Desktop/flutter_app/lib/Components/Views/login.dart';
+import 'package:flutter_app/Components/Views/login.dart';
 
 void main() {
   runApp(MyApp());
