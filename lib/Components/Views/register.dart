@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../base_text_field.dart';
-import '../button.dart';
-import '../Views/login.dart';
-import 'package:flutter_app/Components/bottom_navigation_bar.dart';
+import 'package:flutter_app/Components/base_text_field.dart';
+import 'package:flutter_app/Components/button.dart';
+import 'package:flutter_app/Components/Views/login.dart';
 
 class RegisterScreen extends StatelessWidget {
   String _username;
