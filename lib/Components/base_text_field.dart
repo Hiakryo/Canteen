@@ -7,6 +7,7 @@ class BaseTextField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final bool isPass;
   final bool isUsername;
+
   const BaseTextField({
     Key key,
     this.hinttext,
@@ -21,21 +22,23 @@ class BaseTextField extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          buildUsername(),
+          buildInputField(),
         ],
       ),
     );
   }
 
-  Widget buildUsername() {
+  Widget buildInputField() {
     return TextFieldContainer(
       child: TextFormField(
         onChanged: onChanged,
         obscureText: isPass,
         decoration: InputDecoration(
-            icon: Icon(icon, color: Colors.amber),
-            hintText: hinttext,
-            border: InputBorder.none),
+          // labelText: hinttext,
+          icon: Icon(icon, color: Colors.amber),
+          hintText: hinttext,
+          border: InputBorder.none,
+        ),
         validator: (String value) {
           if (value.isEmpty) {
             return "Required";

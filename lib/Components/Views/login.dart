@@ -26,60 +26,64 @@ class FormValidationState extends State<LoginScreen> {
     return Scaffold(
       //appBar: AppBar(title: Text("FormDemo")),
       body: SingleChildScrollView(
-          child: Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: screenSize.height,
-              child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center
-                    ,
-                    children: <Widget>[
-                      Image.asset(
-                        'Assets/logo.png',
-                        height: screenSize.height * 0.3,
+        child: Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          height: screenSize.height,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'Assets/logo.png',
+                  height: screenSize.height * 0.3,
+                ),
+                // SizedBox(height: screenSize.height * 0.2),
+                BaseTextField(
+                  hinttext: "Username",
+                  icon: Icons.person,
+                  isPass: false,
+                  onChanged: (value) {},
+                ),
+                BaseTextField(
+                  hinttext: "Password",
+                  icon: Icons.lock,
+                  isPass: true,
+                  onChanged: (value) {},
+                ),
+                Button(
+                  text: "LOGIN",
+                  textColor: Colors.white,
+                  press: () {
+                    if (!_formKey.currentState.validate()) {
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavbar()
                       ),
-                      // SizedBox(height: screenSize.height * 0.2),
-                      BaseTextField(
-                        hinttext: "Username",
-                        icon: Icons.person,
-                        isPass: false,
-                        onChanged: (value) {},
+                    );
+                  },
+                ),
+                Button(
+                  text: "REGISTER",
+                  textColor: Colors.white,
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegisterScreen()
                       ),
-                      BaseTextField(
-                        hinttext: "Password",
-                        icon: Icons.lock,
-                        isPass: true,
-                        onChanged: (value) {},
-                      ),
-                      Button(
-                        text: "LOGIN",
-                        textColor: Colors.white,
-                        press: () {
-                          if (!_formKey.currentState.validate()) {
-                            return;
-                          }
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomNavbar()),
-                          );
-                        },
-                      ),
-                      Button(
-                        text: "REGISTER",
-                        textColor: Colors.white,
-                        press: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterScreen()),
-                          );
-                        },
-                      ),
-                    ],
-                  )))),
+                    );
+                  },
+                ),
+              ],
+            )
+          )
+        )
+      ),
     );
   }
 }
