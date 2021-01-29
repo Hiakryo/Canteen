@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Components/Widgets/color.dart';
 
 class Saldo extends StatelessWidget {
   const Saldo({
@@ -20,14 +21,13 @@ class Saldo extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              color: Colors.white,
               alignment: Alignment.center,
               height: 100,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Saldo',
+                      'Cash',
                       style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
                     Text(
@@ -35,12 +35,17 @@ class Saldo extends StatelessWidget {
                       style: TextStyle(color: Colors.black, fontSize: 20),
                     )
                   ]),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
             ),
           ),
           Expanded(
             flex: 3,
             child: Container(
                 alignment: Alignment.center,
+                margin: const EdgeInsets.only(left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -82,7 +87,7 @@ class Saldo extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.blueAccent,
+        color: ThemeColor.buttonColor,
 
         // boxShadow: [
         //   BoxShadow(color: Colors.green, spreadRadius: 3),

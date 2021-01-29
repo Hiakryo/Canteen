@@ -27,6 +27,8 @@ extension HexColor on Color {
 }
 
 class ThemeColor {
-  static Color primaryColor = HexColor.fromHex("#FBA323");
+  static Color primaryColor = HexColor.fromHex("#FFC478");
   static Color secondaryColor = HexColor.fromHex("#FF8E3E");
+  static Color buttonColor = HexColor.fromHex("#D95227");
+  static Color textFieldColor = HexColor.fromHex("#ffe9c9");
 }

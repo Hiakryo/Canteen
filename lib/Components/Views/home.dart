@@ -4,7 +4,7 @@ import 'package:flutter_app/Components/HomeComponents/promo.dart';
 import 'package:flutter_app/Components/Views/profile.dart';
 import 'package:flutter_app/Components/bottom_navigation_bar.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
+import 'package:flutter_app/Components/globals.dart';
 import 'package:flutter_app/Components/HomeComponents/saldo.dart';
 
 // class Home extends StatelessWidget {
@@ -46,7 +46,7 @@ class MainScreenState extends State<MainScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Hello, Kevin Alim', style: TextStyle(fontSize: 22)),
+                    Text('Hello, ' + kuda, style: TextStyle(fontSize: 22)),
                     Image.asset('Assets/notification.png',
                         width: 32, height: 32, fit: BoxFit.fill)
                   ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Components/HomeComponents/promo.dart';
+
+import '../Widgets/color.dart';
 
 class PointScreen extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class _PointScreenState extends State<PointScreen> {
   Widget build(BuildContext context) {
      Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+
       body: SingleChildScrollView(
           padding: EdgeInsets.all(16.0),
           child: Container(
@@ -25,28 +29,85 @@ class _PointScreenState extends State<PointScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Hello, Kevin Alim', style: TextStyle(fontSize: 22)),
-                      Image.asset('Assets/notification.png',
-                          width: 32, height: 32, fit: BoxFit.fill)
+                      Text('Point', style: TextStyle(fontSize: 22)),
+                      IconButton(
+                        icon: Icon(
+                          Icons.card_giftcard_outlined,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          // do something
+                        },
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 12,
                 ),
-                SizedBox(
-                  height: screenSize.height * 0.04,
-                ),
                 Container(
-                  alignment: Alignment.topLeft,
-                  child: Text('News',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 24)),
+                  height: screenSize.width * 0.3,
+                  width: screenSize.width,
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          color: Colors.white,
+                          alignment: Alignment.center,
+                          height: 100,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+
+                                Text(
+                                  '100 Coin',
+                                  style: TextStyle(color: Colors.black, fontSize: 20),
+                                )
+                              ]),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: screenSize.width * 0.05,
+                                    ),
+
+                                    Text('Purchased More ',
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 20)),
+                                    Text('To Get More Coin',
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 20)),
+                                  ],
+                                ),
+
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ThemeColor.buttonColor,
+
+                    // boxShadow: [
+                    //   BoxShadow(color: Colors.green, spreadRadius: 3),
+                    // ],
+                  ),
                 ),
-                SizedBox(
-                  height: screenSize.height * 0.02,
-                ),
-                
+
                 SizedBox(
                   height: screenSize.height * 0.04,
                 ),
@@ -59,6 +120,16 @@ class _PointScreenState extends State<PointScreen> {
                 SizedBox(
                   height: screenSize.height * 0.02,
                 ),
+                Promo(screenSize: screenSize),
+                SizedBox(
+                  height: screenSize.height * 0.02,
+                ),
+                Promo(screenSize: screenSize),
+                SizedBox(
+                  height: screenSize.height * 0.02,
+                ),
+                Promo(screenSize: screenSize),
+
               ],
             ),
           )),

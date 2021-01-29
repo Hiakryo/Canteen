@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Components/text_field_container.dart';
+import 'package:flutter_app/Components/globals.dart';
 
 class BaseTextField extends StatelessWidget {
   final String hinttext;
@@ -33,6 +34,12 @@ class BaseTextField extends StatelessWidget {
       child: TextFormField(
         onChanged: onChanged,
         obscureText: isPass,
+        onSaved: (String value) {
+          if(hinttext == "Username"){
+            kuda = value;
+            print(kuda);
+          }
+        },
         decoration: InputDecoration(
           // labelText: hinttext,
           icon: Icon(icon, color: Colors.amber),

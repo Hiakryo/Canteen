@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Components/Widgets/color.dart';
 import 'package:flutter_app/Components/base_text_field.dart';
 import 'package:flutter_app/Components/button.dart';
 import 'package:flutter_app/Components/Views/login.dart';
@@ -11,20 +12,21 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      //appBar: AppBar(title: Text("FormDemo")),
-      body: SingleChildScrollView(
+    return SafeArea(  //appBar: AppBar(title: Text("FormDemo")),
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Container(
               width: double.infinity,
               alignment: Alignment.center,
-              height: screenSize.height,
               child: Form(
                   key: _formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: screenSize.height * 0.2),
-                      Text('kuda'),
+                      SizedBox(height: 25,),
+                      Text('Register',
+                      style: TextStyle(color: ThemeColor.buttonColor, fontSize: 32),),
+                      SizedBox(height: 10,),
                       BaseTextField(
                         hinttext: "Username",
                         icon: Icons.person,
@@ -49,7 +51,7 @@ class RegisterScreen extends StatelessWidget {
                         isPass: true,
                         onChanged: (value) {},
                       ),
-                       BaseTextField(
+                      BaseTextField(
                         hinttext: "School Name",
                         icon: Icons.school,
                         isPass: true,
@@ -67,14 +69,14 @@ class RegisterScreen extends StatelessWidget {
                         isPass: true,
                         onChanged: (value) {},
                       ),
+                      SizedBox(height: 10,),
                       Button(
-                        text: "Register",
+                        text: "REGISTER",
                         textColor: Colors.white,
                         press: () {
                           if (!_formKey.currentState.validate()) {
                             return;
                           }
-
                           Navigator.pop(
                             context,
                             MaterialPageRoute(
@@ -82,10 +84,9 @@ class RegisterScreen extends StatelessWidget {
                           );
                         },
                       ),
+                      SizedBox(height: 25,),
                     ],
-                   
-                  )
-                  ))),
-    );
+                  )))),
+    ));
   }
 }
