@@ -61,9 +61,7 @@ class FormValidationState extends State<LoginScreen> {
                     }
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => BottomNavbar()
-                      ),
+                      MaterialPageRoute(builder: (context) => BottomNavbar()),
                     );
                   },
                 ),
@@ -73,16 +71,14 @@ class FormValidationState extends State<LoginScreen> {
                   press: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => RegisterScreen()
-                      ),
+                      MaterialPageRoute(builder: (context) => RegisterScreen()),
                     );
                   },
                 ),
               ],
-            )
-          )
-        )
+            ),
+          ),
+        ),
       ),
     );
   }
