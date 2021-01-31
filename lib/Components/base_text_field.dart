@@ -40,6 +40,7 @@ class BaseTextField extends StatelessWidget {
           border: InputBorder.none,
         ),
         validator: (String value) {
+          return null; // TODO: validasi off, hapus nnti
           if (value.isEmpty) {
             return "Required";
           }
