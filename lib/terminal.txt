@@ -1,0 +1,11 @@
+------------------------
+
+flutter clean
+flutter packages get
+flutter packages upgrade
+
+------------------------
+
+git add .
+git commit -m "feat: add ..."
+git push
