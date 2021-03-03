@@ -6,6 +6,7 @@ import 'package:flutter_app/Components/globals.dart' as globals;
 import 'VIews/point.dart';
 import 'Views/profile.dart';
 import 'Views/qr.dart';
+import 'Widgets/color.dart';
 
 class BottomNavbar extends StatefulWidget {
   @override
@@ -52,27 +53,27 @@ class BottomNavbarState extends State<BottomNavbar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
+            backgroundColor: ThemeColor.buttonColor,
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
+            backgroundColor: ThemeColor.buttonColor,
             icon: Icon(Icons.restaurant_menu),
-            label: 'Menu',
+            label: 'Tenant',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
+            backgroundColor: ThemeColor.buttonColor,
             icon: Icon(Icons.qr_code),
             label: 'QR',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
+            backgroundColor: ThemeColor.buttonColor,
             icon: Icon(Icons.monetization_on_rounded),
             label: 'Point',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
+            backgroundColor: ThemeColor.buttonColor,
             icon: Icon(Icons.person),
             label: 'Profile',
           ),

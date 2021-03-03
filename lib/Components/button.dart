@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Widgets/color.dart';
+
 class Button extends StatelessWidget {
   final String text;
   final Function press;
@@ -13,17 +15,17 @@ class Button extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: screenSize.width * 0.9,
+      width: screenSize.width * 0.8,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: FlatButton(
           padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
-          color: Colors.green,
+          color: ThemeColor.buttonColor,
           onPressed: press,
           
           child: Text(
             text,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
 
           ),
         ),

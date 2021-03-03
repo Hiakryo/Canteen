@@ -12,11 +12,16 @@ class Promo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
-      child: Image.asset(
-        'Assets/promo.png',
-        height: screenSize.width * 0.5,
-        width: screenSize.width,
-        fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: () {
+         // print('asd');
+        },
+        child: Image.asset(
+          'Assets/promo.png',
+          height: screenSize.width * 0.5,
+          width: screenSize.width,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

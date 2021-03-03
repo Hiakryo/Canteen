@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Components/Widgets/color.dart';
-import 'package:flutter_app/Components/bottom_navigation_bar.dart';
+import 'package:flutter_app/Components/Views/menu.dart';
+import 'package:flutter_app/Components/button.dart';
+import 'package:flutter_app/Components/Views/menu.dart';
 
 class TenantsScreen extends StatefulWidget {
   @override
@@ -12,17 +13,39 @@ class TenantsScreen extends StatefulWidget {
   }
 }
 
-class Tenant {
+ class Tenant {
   String name;
   String desc;
+  Image image;
   List<Item> items;
-  Tenant(this.name, this.desc) {
+
+  static double imageHeight = 100;
+  static double imageWidth = imageHeight * 1.5;
+
+  Tenant(this.name, this.desc, this.image) {
     this.items = new List<Item>();
   }
-  Tenant.withItems(String name, String desc, List<Item> items) {
-    this.name = name;
-    this.desc = desc;
-    this.items = items;
+
+  Tenant.withItems(this.name, this.desc, String imageSource, this.items) {
+    this.image =
+        Image.asset(imageSource, height: imageHeight, width: imageWidth);
+  }
+
+  Widget getTenantItemImages() {
+    List<Widget> result = new List<Widget>();
+    for (Item item in this.items) {
+      result.add(Card(child: item.image));
+    }
+    return new SingleChildScrollView(
+      child: Row(children: result),
+      scrollDirection: Axis.horizontal,
+    );
+  }
+
+  void reset() {
+    for (Item item in this.items) {
+      item.init();
+    }
   }
 }
 
@@ -31,61 +54,269 @@ class Item {
   String desc;
   double price;
   Image image;
+  int quantity;
+
+  static double imageHeight = 100;
+  static double imageWidth = imageHeight * 1.8;
+
+  Item(this.name, this.desc, this.price, String imageSource) {
+    this.quantity = 0;
+    this.image =
+        Image.asset(imageSource, height: imageHeight, width: imageWidth);
+  }
+
+  void init() {
+    this.quantity = 0;
+  }
 }
+
+double imageItemSize = 100;
 
 class TenantsScreenState extends State<TenantsScreen>
     with AutomaticKeepAliveClientMixin<TenantsScreen> {
   @override
-  List<Tenant> tenants = <Tenant>[
-    Tenant("TenantA", "descA"),
-    Tenant("TenantB", "descB"),
-    Tenant("TenantC", "descC"),
-    Tenant("TenantD", "descD"),
-  ];
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
       appBar: null,
       body: SafeArea(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: tenants.length,
-            itemBuilder: (BuildContext context, int index) {
-              // container tenant ke-index
-              return tenantRow(index);
-            }),
+        child: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12, top: 12, right: 12),
+                child: Text(
+                  "Tenants List",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: tenants.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // container tenant ke-index
+                  return GestureDetector(
+                    child: tenantRow(index),
+                    onTap: () => {
+                      // Navigator.pushNamed(context, "second", arguments: {"name" :
+                      //   "Bijendra", "rollNo": 65210});
+                      // },
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MenuScreen(
+                            tenant: tenants[index],
+                          ),
+                        ),
+                      ),
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
+  List<Tenant> tenants = <Tenant>[
+    Tenant.withItems("Kopisisasi", "Kopisisasi.id", 'Assets/logo.png', <Item>[
+      Item(
+        "Espresso",
+        "Espresso",
+        15000,
+        'Assets/Espresso.jpeg',
+      ),
+      Item(
+        "Americano",
+        "Americano",
+        18000,
+        'Assets/Americano.jpeg',
+      ),
+      Item(
+        "Eskobar",
+        "Eskobar",
+        10000,
+        'Assets/Eskobar.jpeg',
+      ),
+      Item(
+        "Es Kopi Susu",
+        "Es Kopi Susu",
+        20000,
+        'Assets/Es Kopi Susu.jpeg',
+      ),
+      Item(
+        "Cappucino",
+        "Cappucino",
+        22000,
+        'Assets/Cappucino.jpeg',
+      ),
+      Item(
+        "Cafe Latte",
+        "Cafe Latte",
+        22000,
+        'Assets/Cafe Latte.jpeg',
+      ),
+      Item(
+        "Affogatto",
+        "Affogatto",
+        24000,
+        'Assets/Affogatto.jpeg',
+      ),
+      Item(
+        "Chocolate",
+        "Chocolate",
+        24000,
+        'Assets/Chocolate.jpeg',
+      ),
+      Item(
+        "Red Velvet",
+        "Red Velvet",
+        24000,
+        'Assets/Red Velvet.jpeg',
+      ),
+      Item(
+        "Taro",
+        "Taro",
+        24000,
+        'Assets/Taro.jpeg',
+      ),
+      Item(
+        "Strawberry",
+        "Strawberry",
+        24000,
+        'Assets/Strawberry.jpeg',
+      ),
+      Item(
+        "Ice Tea",
+        "Ice Tea",
+        100,
+        'Assets/Ice Tea.jpeg',
+      ),
+    ]),
+    Tenant.withItems("tenantA", "descA", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        3330000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        100,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("tenantB", "descB", 'Assets/promo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        90000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        10000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemC",
+        "descItemC",
+        30000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemD",
+        "descItemD",
+        70000,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("tenantC", "descC", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        20000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        70000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemA",
+        "descItemA",
+        40000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        50000,
+        'Assets/promo.png',
+      ),
+    ]),
+  ];
+
   Widget tenantRow(int index) {
     return Card(
-        // margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-        child:
-            // ListTile(
-            //   title: Text('test1'),
-            // ),
-            Column(
-      children: <Widget>[
-        Container(
-          width: 100,
-          decoration: BoxDecoration(
+      // margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      // child :
+      // ListTile(
+      //   title: Text('test1'),
+      // ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            width: double.infinity,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: new BorderRadius.only(
                 topLeft: const Radius.circular(12.0),
                 topRight: const Radius.circular(12.0),
                 bottomLeft: const Radius.circular(12.0),
                 bottomRight: const Radius.circular(12.0),
-              )),
-          child: Column(
-            children: <Widget>[
-              Text('${tenants[index].name}'),
-              Text('${tenants[index].desc}'),
-            ],
+              ),
+            ),
+            child: TenantItemView(tenants[index]),
           ),
-        )
+        ],
+      ),
+    );
+  }
+
+  Widget TenantItemView(Tenant tenant) {
+    print(tenant.getTenantItemImages());
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 0),
+            child: Text(
+              '${tenant.name}',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: tenant.getTenantItemImages(),
+        ),
       ],
-    ));
+    );
   }
 
   @override

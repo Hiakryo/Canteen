@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Widgets/color.dart';
+
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
   const TextFieldContainer({
@@ -13,9 +15,9 @@ class TextFieldContainer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical:10),
       padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-      width: screenSize.width * 0.9,
+      width: screenSize.width * 0.8,
       decoration: BoxDecoration(
-        color: Colors.green,
+        color: ThemeColor.textFieldColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: child,

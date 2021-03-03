@@ -1,3 +1,5 @@
+import 'package:flutter_app/Components/Views/tenant2.dart';
+import 'package:flutter_app/Components/Views/tenants.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -12,10 +14,18 @@ class QRViewExample extends StatefulWidget {
   State<StatefulWidget> createState() => _QRViewExampleState();
 }
 
-class _QRViewExampleState extends State<QRViewExample> {
+class _QRViewExampleState extends State<QRViewExample>
+    with WidgetsBindingObserver {
   Barcode result;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  @override
+  void initState() {
+    super.initState();
+    controller?.resumeCamera();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -147,6 +157,37 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (result.code == "sekolahA") {
+          controller?.pauseCamera();
+          result = null;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Tenants2Screen(
+                      tenants: tenantA,
+                    )),
+          ).then((value) => setState(() {}));
+        } else if (result.code == "sekolahB") {
+          controller?.pauseCamera();
+          result = null;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Tenants2Screen(
+                      tenants: tenantB,
+                    )),
+          ).then((value) => setState(() {}));
+        } else if (result.code == "sekolahC") {
+          controller?.pauseCamera();
+          result = null;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Tenants2Screen(
+                      tenants: tenantC,
+                    )),
+          ).then((value) => setState(() {}));
+        }
       });
     });
   }
@@ -154,6 +195,231 @@ class _QRViewExampleState extends State<QRViewExample> {
   @override
   void dispose() {
     controller.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setState(() {
+        controller?.resumeCamera();
+      });
+    } else if (state == AppLifecycleState.inactive) {
+      setState(() {
+        controller?.resumeCamera();
+      });
+    } else if (state == AppLifecycleState.paused) {
+      setState(() {
+        controller?.resumeCamera();
+      });
+    }
+  }
+
+  List<Tenant> tenantA = <Tenant>[
+    Tenant.withItems("WARUNG BU SITI A", "descA", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        99999999,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        100,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG BU SUKIMAH A", "descB", 'Assets/promo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        90000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        10000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemC",
+        "descItemC",
+        30000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemD",
+        "descItemD",
+        70000,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG PAK KARYO A", "descC", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        20000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        70000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemA",
+        "descItemA",
+        40000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        50000,
+        'Assets/promo.png',
+      ),
+    ]),
+  ];
+
+  List<Tenant> tenantB = <Tenant>[
+    Tenant.withItems("WARUNG BU SITI B", "descA", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        99999999,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        100,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG BU SUKIMAH B", "descB", 'Assets/promo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        90000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        10000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemC",
+        "descItemC",
+        30000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemD",
+        "descItemD",
+        70000,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG PAK KARYO B", "descC", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        20000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        70000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemA",
+        "descItemA",
+        40000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        50000,
+        'Assets/promo.png',
+      ),
+    ]),
+  ];
+
+  List<Tenant> tenantC = <Tenant>[
+    Tenant.withItems("WARUNG BU SITI C", "descA", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        99999999,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        100,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG BU SUKIMAH C", "descB", 'Assets/promo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        90000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        10000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemC",
+        "descItemC",
+        30000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemD",
+        "descItemD",
+        70000,
+        'Assets/logo.png',
+      ),
+    ]),
+    Tenant.withItems("WARUNG PAK KARYO C", "descC", 'Assets/logo.png', <Item>[
+      Item(
+        "itemA",
+        "descItemA",
+        20000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        70000,
+        'Assets/promo.png',
+      ),
+      Item(
+        "itemA",
+        "descItemA",
+        40000,
+        'Assets/logo.png',
+      ),
+      Item(
+        "itemB",
+        "descItemB",
+        50000,
+        'Assets/promo.png',
+      ),
+    ]),
+  ];
 }
